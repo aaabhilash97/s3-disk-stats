@@ -67,16 +67,9 @@ if (bucketname) {
 } else {
     process.nextTick(async () => {
         const buckets = await listBuckets();
-        async.eachOfLimit(buckets.Buckets, 5, function (item, key, callback) {
-            process.nextTick(async () => {
-                try {
-                    await main(item.Name);
-                    return callback();
-                } catch (error) {
-                    console.error(error);
-                    return callback();
-                }
-            });
+        async.eachOfLimit(buckets.Buckets, 5, async function (item) {
+            await main(item.Name);
+            return;
         }, function () {
             console.log("All done");
             let _date = new Date().toISOString();
