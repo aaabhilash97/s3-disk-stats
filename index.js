@@ -62,7 +62,7 @@ async function main(BucketName, ContinuationToken) {
 }
 
 if (bucketname) {
-    process.nextTick(async () => {
+    setTimeout(async () => {
         await main(bucketname);
         let _date = new Date().toISOString();
         fs.writeFileSync(`./report-${_date}.json`, JSON.stringify(REPORT));
