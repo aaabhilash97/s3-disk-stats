@@ -41,25 +41,15 @@ function computeStats(BucketName, contents) {
     for (let object of contents) {
         REPORT[BucketName].dataUsed += object.Size;
     }
-    contents = null;
-    global.gc && global.gc();
 }
 
 async function main(BucketName, ContinuationToken) {
     let objects = await listObjects(BucketName, ContinuationToken);
     computeStats(BucketName, objects.Contents);
     const NextContinuationToken = objects.NextContinuationToken;
-    objects = null;
-    global.gc && global.gc();
-    process.stdout.write(".");
+    console.clear();
+    console.log(REPORT);
     return NextContinuationToken;
-    // if (NextContinuationToken) {
-    //     await main(BucketName, NextContinuationToken);
-    //     return true;
-    // } else {
-    //     console.log(REPORT[BucketName]);
-    //     return true;
-    // }
 }
 
 if (bucketname) {
