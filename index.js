@@ -52,18 +52,22 @@ async function main(BucketName, ContinuationToken) {
     objects = null;
     global.gc && global.gc();
     process.stdout.write(".");
-    if (NextContinuationToken) {
-        await main(BucketName, NextContinuationToken);
-        return true;
-    } else {
-        console.log(REPORT[BucketName]);
-        return true;
-    }
+    return NextContinuationToken;
+    // if (NextContinuationToken) {
+    //     await main(BucketName, NextContinuationToken);
+    //     return true;
+    // } else {
+    //     console.log(REPORT[BucketName]);
+    //     return true;
+    // }
 }
 
 if (bucketname) {
     setTimeout(async () => {
-        await main(bucketname);
+        let next = await main(bucketname);
+        while (next) {
+            next = await main(bucketname, next);
+        }
         let _date = new Date().toISOString();
         fs.writeFileSync(`./report-${_date}.json`, JSON.stringify(REPORT));
     });
@@ -71,7 +75,10 @@ if (bucketname) {
     process.nextTick(async () => {
         const buckets = await listBuckets();
         async.eachOfLimit(buckets.Buckets, 5, async function (item) {
-            await main(item.Name);
+            let next = await main(item.Name);
+            while (next) {
+                next = await main(item.Name, next);
+            }
             return;
         }, function () {
             console.log("All done");
