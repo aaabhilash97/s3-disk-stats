@@ -1,3 +1,4 @@
+'use strict';
 const fs = require('fs');
 const async = require('async');
 const { S3 } = require('./config/aws.js');
@@ -55,7 +56,7 @@ async function main(BucketName, ContinuationToken) {
         await main(BucketName, NextContinuationToken);
         return true;
     } else {
-        console.log(REPORT);
+        console.log(REPORT[BucketName]);
         return true;
     }
 }
