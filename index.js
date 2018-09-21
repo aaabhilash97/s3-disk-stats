@@ -40,14 +40,18 @@ function computeStats(BucketName, contents) {
     for (let object of contents) {
         REPORT[BucketName].dataUsed += object.Size;
     }
+    contents = null;
+    global.gc();
 }
 
 async function main(BucketName, ContinuationToken) {
     let objects = await listObjects(BucketName, ContinuationToken);
     computeStats(BucketName, objects.Contents);
-    console.log(REPORT);
-    if (objects.NextContinuationToken) {
-        await main(BucketName, objects.NextContinuationToken);
+    const NextContinuationToken = objects.NextContinuationToken;
+    objects = null;
+    global.gc();
+    if (NextContinuationToken) {
+        await main(BucketName, NextContinuationToken);
         return true;
     } else {
         return true;
