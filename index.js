@@ -50,10 +50,12 @@ async function main(BucketName, ContinuationToken) {
     const NextContinuationToken = objects.NextContinuationToken;
     objects = null;
     global.gc && global.gc();
+    process.stdout.write(".");
     if (NextContinuationToken) {
         await main(BucketName, NextContinuationToken);
         return true;
     } else {
+        console.log(REPORT);
         return true;
     }
 }
