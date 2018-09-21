@@ -1,5 +1,5 @@
 {
-  "name": "git remote add origin https://github.com/aaabhilash97/s3-disk-stats.git",
+  "name": "s3-disk-stats",
   "version": "1.0.0",
   "description": "S3 disk usage stats analyzer",
   "main": "index.js",
