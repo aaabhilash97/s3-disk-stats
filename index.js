@@ -5,8 +5,10 @@ const { bucketname } = require('./argparser');
 const BucketName = bucketname;
 
 const REPORT = {
-    dataUsed: 0,
-    objectCount: 0
+    [BucketName]: {
+        dataUsed: 0,
+        objectCount: 0
+    }
 };
 
 function listObjects(ContinuationToken) {
@@ -23,9 +25,9 @@ function listObjects(ContinuationToken) {
 }
 
 function computeStats(contents) {
-    REPORT.objectCount += contents.length;
+    REPORT[BucketName].objectCount += contents.length;
     for (let object of contents) {
-        REPORT.dataUsed += object.Size;
+        REPORT[BucketName].dataUsed += object.Size;
     }
 }
 
