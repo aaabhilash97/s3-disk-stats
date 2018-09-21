@@ -1,0 +1,19 @@
+{
+  "name": "git remote add origin https://github.com/aaabhilash97/s3-disk-stats.git",
+  "version": "1.0.0",
+  "description": "S3 disk usage stats analyzer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "url": "https://github.com/aaabhilash97/s3-disk-stats.git"
+  },
+  "keywords": [],
+  "author": "aaabhilash97<aaabhilash97@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "argparse": "^1.0.10",
+    "aws-sdk": "^2.319.0"
+  }
+}

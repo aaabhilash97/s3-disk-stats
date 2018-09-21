@@ -1,0 +1,12 @@
+**/dump.rdb
+**/logs
+**/node_modules
+**/*.log
+**/*.swp
+**/.DS_Store
+**/nohup.out
+yarn.lock
+.vscode/
+.credentials
+.env
+report-*
