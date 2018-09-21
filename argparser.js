@@ -10,8 +10,7 @@ const parser = new ArgumentParser({
 parser.addArgument(
     ['-b', '--bucketname'],
     {
-        help: 'S3 bucket name',
-        required: true
+        help: 'S3 bucket name'
     }
 );
 
