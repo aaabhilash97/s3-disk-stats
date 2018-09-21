@@ -41,7 +41,7 @@ function computeStats(BucketName, contents) {
         REPORT[BucketName].dataUsed += object.Size;
     }
     contents = null;
-    global.gc();
+    global.gc && global.gc();
 }
 
 async function main(BucketName, ContinuationToken) {
@@ -49,7 +49,7 @@ async function main(BucketName, ContinuationToken) {
     computeStats(BucketName, objects.Contents);
     const NextContinuationToken = objects.NextContinuationToken;
     objects = null;
-    global.gc();
+    global.gc && global.gc();
     if (NextContinuationToken) {
         await main(BucketName, NextContinuationToken);
         return true;
