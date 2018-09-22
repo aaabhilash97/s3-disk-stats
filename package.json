@@ -15,6 +15,7 @@
   "dependencies": {
     "argparse": "^1.0.10",
     "async": "^2.6.1",
-    "aws-sdk": "^2.319.0"
+    "aws-sdk": "^2.319.0",
+    "pretty-bytes": "^5.1.0"
   }
 }
