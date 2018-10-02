@@ -2,6 +2,13 @@
 
 Get s3 disk usage stats.
 
+## Install & Run
+
+```sh
+npm install
+node index.js -b buvket-name
+```
+
 ## Usage
 
 ```sh
